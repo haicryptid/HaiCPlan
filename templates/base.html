@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}HaileyPlan{% endblock %}</title>
+    <title>{% block title %}HaiCPlan{% endblock %}</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='HaileyPlan Yellow Green1.png') }}">
     <style>
         body {
@@ -187,7 +187,7 @@
 <body>
     {% if session.get('username') %}
     <header>
-        <div id="logo" onclick='location.href="{{ url_for("submit") }}"'>❤️ HAILEYPLAN</div>
+        <div id="logo" onclick='location.href="{{ url_for("submit") }}"'>❤️ HAICPLAN</div>
 
         <a href="{{ url_for('profile') }}" class="profile-link">
             <span class="profile-emoji">{{ session.get('emoji', '👤') }}</span> {{ session['username'] }}
@@ -203,7 +203,7 @@
         {% block content %}{% endblock %}
     </main>
     <footer>
-        &copy; 2025 HaileyPlan | v1.0.0
+        &copy; 2025 HaiCPlan | v1.0.0
     </footer>
 
     <script>
