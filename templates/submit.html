@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .submit-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+        text-align: center;
+        color: #333;
+    }
+    h1 {
+        font-size: 3em;
+        margin-bottom: 0.3em;
+    }
+    .emoji {
+        font-size: 2.5em;
+        margin-bottom: 0.5em;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 300px;
+        background-color: #ffffffdd;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    label {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+    input, button {
+        padding: 10px;
+        font-size: 1em;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+    input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px #007bff;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+    }
+    .view-link {
+            margin-top: 1.0em;
+            font-size: 0.95em;
+            color: #555;
+    }
+    .view-link a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .view-link a:hover {
+        text-decoration: underline;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="submit-container">
+    <h1>📝 일정 등록 ✍️</h1>
+    <div class="emoji">📅 새로운 일정을 추가해봐요! ✨</div>
+    <form method="post">
+        <label for="name">👤 이름</label>
+        <input type="text" name="name" required>
+
+        <label for="task">📌 과제 / 일정</label>
+        <input type="text" name="task" required>
+
+        <label for="deadline">⏰ 마감일</label>
+        <input type="date" name="deadline" required>
+
+        <button type="submit">등록하기 ✅</button>
+    </form>
+    <div class="view-link">
+        등록할 일정이 없으신가요? <a href="{{ url_for('view') }}">일정 조회 하러 가기</a>
+    </div>
+</div>
+{% endblock %}

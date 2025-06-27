@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .view-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 3em;
+        margin-bottom: 0.3em;
+    }
+
+    .emoji {
+        font-size: 2.5em;
+        margin-bottom: 1em;
+    }
+
+    .table-wrapper {
+        display: flex;
+        justify-content: center;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        table-layout: auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        word-break: keep-all;
+        border-bottom: 1px solid #ddd;
+        font-size: 1.1em;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f6fc;
+    }
+
+    tr:hover {
+        background-color: #d6e4ff;
+    }
+
+    td.actions {
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    td.actions a,
+    td.actions form button {
+        margin: 0 5px;
+        padding: 6px 12px;
+        font-size: 0.9em;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+
+    td.actions a {
+        background-color: #28a745;
+        color: white;
+    }
+
+    td.actions a:hover {
+        background-color: #1e7e34;
+    }
+
+    td.actions form button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    td.actions form button:hover {
+        background-color: #a71d2a;
+    }
+</style>
+
+<div class="view-container">
+    <h1>📋 전체 일정 목록</h1>
+    <div class="emoji">🗂️ 등록된 모든 일정들을 한눈에!</div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>  <!-- 여기 수정 -->
+                    <th>이름</th>
+                    <th>과제/일정</th>
+                    <th>마감일</th>
+                    <th>작성자</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, name, task, deadline, username in schedules %}
+                <tr>
+                    <td>{{ loop.index }}</td>  <!-- 여기 수정 -->
+                    <td>{{ name }}</td>
+                    <td>{{ task }}</td>
+                    <td>{{ deadline }}</td>
+                    <td>{{ username }}</td>
+                    <td class="actions">
+                        <a href="{{ url_for('edit', id=id) }}">✏️ 수정</a>
+                        <form action="{{ url_for('delete', id=id) }}" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">🗑️ 삭제</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>회원가입 - HaileyPlan</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='HaileyPlan Yellow Green1.png') }}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            color: #333;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.3em;
+            color: #28a745;
+        }
+        form {
+            background: white;
+            padding: 2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        label {
+            display: block;
+            margin-top: 1em;
+            font-weight: bold;
+            text-align: left;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.6em;
+            margin-top: 0.3em;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        button {
+            margin-top: 1.8em;
+            width: 100%;
+            padding: 0.8em;
+            background-color: #28a745;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1e7e34;
+        }
+        .toggle-password {
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            color: #28a745;
+            cursor: pointer;
+            user-select: none;
+        }
+        .login-link {
+            margin-top: 1.2em;
+            font-size: 0.95em;
+            color: #555;
+        }
+        .login-link a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .admin-error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 0.3em;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>📝 회원가입</h1>
+
+    <form id="registerForm" method="post">
+        <label for="username">아이디</label>
+        <input type="text" name="username" required />
+
+        <label for="password">비밀번호</label>
+        <input type="password" name="password" id="password" required />
+        <div class="toggle-password" onclick="togglePassword()">👁️ 비밀번호 보기</div>
+
+        <label for="role">역할</label>
+        <select name="role" id="roleSelect" required>
+            <option value="student">학생</option>
+            <option value="admin">관리자</option>
+        </select>
+
+        <!-- 관리자 키 입력창 -->
+        <label for="admin_key" id="adminKeyLabel" style="display: none;">관리자 인증 키</label>
+        <input type="password" name="admin_key" id="adminKeyInput" style="display: none;" />
+        <div id="adminKeyError" class="admin-error-message" style="display: none;">❌ 관리자 인증 키가 올바르지 않습니다.</div>
+
+        <button type="submit">회원가입</button>
+    </form>
+
+    <div class="login-link">
+        이미 계정이 있으신가요? <a href="{{ url_for('login') }}">로그인 하러 가기</a>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const pwd = document.getElementById('password');
+            pwd.type = (pwd.type === "password") ? "text" : "password";
+        }
+
+        const roleSelect = document.getElementById('roleSelect');
+        const adminKeyLabel = document.getElementById('adminKeyLabel');
+        const adminKeyInput = document.getElementById('adminKeyInput');
+        const adminKeyError = document.getElementById('adminKeyError');
+
+        roleSelect.addEventListener('change', () => {
+            if (roleSelect.value === 'admin') {
+                adminKeyLabel.style.display = 'block';
+                adminKeyInput.style.display = 'block';
+            } else {
+                adminKeyLabel.style.display = 'none';
+                adminKeyInput.style.display = 'none';
+                adminKeyError.style.display = 'none';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            const role = roleSelect.value;
+            const adminKey = adminKeyInput.value.trim();
+            const correctKey = "admin123"; // ✅ 하은이가 설정한 관리자 키!
+
+            if (role === 'admin' && adminKey !== correctKey) {
+                adminKeyError.style.display = 'block';
+                event.preventDefault(); // 서버로 전송 안 함
+            } else {
+                adminKeyError.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .edit-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px 25px;
+        background-color: #f0f8ff;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+    }
+    h1 {
+        font-size: 2.8em;
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+    .emoji {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+    form label {
+        display: block;
+        font-weight: 600;
+        margin: 15px 0 8px 0;
+        font-size: 1.2em;
+        color: #0056b3;
+    }
+    form input[type="text"],
+    form input[type="date"] {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1.1em;
+        border: 2px solid #007bff;
+        border-radius: 10px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+    form input[type="text"]:focus,
+    form input[type="date"]:focus {
+        border-color: #0056b3;
+        box-shadow: 0 0 8px #0056b3;
+    }
+    form button {
+        margin-top: 25px;
+        padding: 12px 30px;
+        background-color: #28a745;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1.2em;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    form button:hover {
+        background-color: #1e7e34;
+    }
+</style>
+
+<div class="edit-container">
+    <h1>✏️ 일정 수정하기</h1>
+    <div class="emoji">📝 변경할 내용을 입력하고 저장해 주세요!</div>
+
+    <form method="post">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" value="{{ schedule[0] }}" required>
+
+        <label for="task">과제/일정</label>
+        <input type="text" id="task" name="task" value="{{ schedule[1] }}" required>
+
+        <label for="deadline">마감일</label>
+        <input type="date" id="deadline" name="deadline" value="{{ schedule[2] }}" required>
+
+        <button type="submit">💾 저장하기</button>
+    </form>
+</div>
+{% endblock %}
