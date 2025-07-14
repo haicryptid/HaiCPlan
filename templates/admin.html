@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>👩‍💼 관리자 패널 | HaiCPlan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='HaiCPlan.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>🌌 HaiCPlan 관리자 대시보드</h2>
+        <!-- admin_users.html -->
+        <button id="toggle-theme" class="theme-toggle">🌙 다크 모드</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Emoji</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ user[3] }}</td>
+                    <td>
+                        <form action="{{ url_for('reset_password', user_id=user[0]) }}" method="post"
+                            style="display:inline;">
+                            <button class="neon-btn">🔐 초기화</button>
+                        </form>
+                        <form action="{{ url_for('delete_user', user_id=user[0]) }}" method="post"
+                            style="display:inline;">
+                            <button class="neon-btn danger" onclick="return confirm('정말 삭제할까요?')">🗑️ 삭제</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 현재 테마 상태를 가져와서 적용
+        const currentTheme = sessionStorage.getItem("theme") || "light";
+        document.body.className = currentTheme;
+
+        // 버튼 클릭 시 테마 전환
+        const toggleBtn = document.getElementById("toggle-theme");
+        toggleBtn.addEventListener("click", () => {
+            const next = (document.body.className === "dark") ? "light" : "dark";
+            document.body.className = next;
+            sessionStorage.setItem("theme", next);
+            toggleBtn.textContent = (next === "dark") ? "☀️ 라이트 모드" : "🌙 다크 모드";
+        });
+
+        // 처음 진입 시 버튼 텍스트도 테마에 맞게
+        toggleBtn.textContent = (currentTheme === "dark") ? "☀️ 라이트 모드" : "🌙 다크 모드";
+    </script>
+</body>
+
+</html>

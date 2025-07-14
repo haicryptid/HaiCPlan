@@ -1,0 +1,149 @@
+/* 🌌 기본 설정 */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0d0d1a;
+    color: #e0e0ff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 🌀 중앙 정렬 박스 */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    box-shadow: 0 0 20px #00ffc8;
+    text-align: center;
+}
+
+/* 🌟 제목 */
+h2 {
+    color: #00ffc8;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+/* 🧾 테이블 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #444;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: rgba(0, 255, 200, 0.1);
+}
+
+/* 💡 네온 버튼 */
+.neon-btn {
+    background: transparent;
+    color: #00ffc8;
+    border: 2px solid #00ffc8;
+    border-radius: 10px;
+    padding: 8px 8px;
+    margin: 0 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.neon-btn:hover {
+    background-color: #00ffc8;
+    color:  #ffffff;
+    box-shadow: 0 0 12px #00ffc8;
+}
+
+/* ❌ 삭제 버튼 */
+.neon-btn.danger {
+    border-color: #ff4e4e;
+    color: #ff4e4e;
+}
+
+.neon-btn.danger:hover {
+    background-color: #ff4e4e;
+    color: #ffffff;
+    box-shadow: 0 0 12px #ff4e4e;
+}
+
+/* 🌙 테마 토글 버튼 */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: none;
+    border: 2px solid #888;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.dark .theme-toggle {
+    color: #00ffc8;
+    border-color: #00ffc8;
+}
+
+/* ✅ Light Mode 추가 */
+
+body.light h2{
+    color: #3fb79d;
+}
+body.light {
+    background-color: #fefefe;
+    color: #111;
+}
+
+body.light .container {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #ccc;
+}
+
+body.light table {
+    background-color: #fafafa;
+}
+
+body.light tr:hover {
+    background-color: #f0f0f0;
+}
+
+body.light .neon-btn {
+    border-color: #3fb79d;
+    color: #3fb79d;
+}
+
+body.light .neon-btn:hover {
+    background-color: #3fb79d;
+    color: #fff;
+}
+
+body.light .neon-btn.danger {
+    border-color: #cc0000;
+    color: #cc0000;
+}
+
+body.light .neon-btn.danger:hover {
+    background-color: #cc0000;
+    color: #fff;
+}
+
+body.light .theme-toggle {
+    color: #333;
+    border-color: #333;
+}

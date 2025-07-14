@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8" />
     <title>환영합니다 - HaiCPlan</title>
@@ -11,14 +12,17 @@
             text-align: center;
             padding-top: 15vh;
         }
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 0.2em;
         }
+
         p {
             font-size: 1.3em;
             margin-bottom: 2em;
         }
+
         a.button {
             padding: 1em 2em;
             background-color: #007bff;
@@ -29,14 +33,46 @@
             font-size: 1.2em;
             transition: background-color 0.3s;
         }
+
         a.button:hover {
             background-color: #0056b3;
         }
+
+        /* 기존 CSS 아래에 이어서 추가해줘! */
+
+        .neon-btn {
+            padding: 1em 2em;
+            background-color: #3fb79d;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .neon-btn:hover {
+            background: #00ffc8;
+            color: #3b907d;
+            box-shadow:
+                0 0 8px #00ffc8,
+                0 0 10px #00ffc8,
+                0 0 10px #00ffc8;
+            transform: scale(1.05);
+        }
     </style>
 </head>
+
 <body>
     <h1>🎉 {{ username }}님 환영합니다! 🎉</h1>
     <p>하은이와 함께 일정 수정하러 가보실까요? 😊</p>
     <a class="button" href="{{ url_for('submit') }}">일정 등록/수정하러 가기 ➡️</a>
+
+    {% if session.role == 'admin' %}
+    <a href="{{ url_for('admin_users') }}" class="neon-btn">관리자 대시보드 바로가기 ➡️</a>
+    {% endif %}
+
+
 </body>
+
 </html>

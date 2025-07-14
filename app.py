@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+import random
+import string
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -242,6 +244,52 @@ def delete(id):
     conn.commit()
     conn.close()
     return redirect(url_for('view'))
+
+# -------------관리자만 접근 가능한 페이지-------------
+
+@app.route('/admin')
+def admin_users():
+    if session.get('role') != 'admin':
+        return "⚠️ 관리자만 접근할 수 있습니다!"
+
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    c.execute("SELECT id, username, role, emoji FROM users")
+    users = c.fetchall()
+    conn.close()
+
+    return render_template('admin.html', users=users)
+
+@app.route('/admin/reset_password/<int:user_id>', methods=['POST'])
+def reset_password(user_id):
+    if session.get('role') != 'admin':
+        return "⚠️ 관리자만 접근할 수 있습니다!"
+
+    # 임시 비밀번호 생성
+    new_password = 'Temp' + ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+    hashed_pw = generate_password_hash(new_password)
+
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    c.execute("UPDATE users SET password=? WHERE id=?", (hashed_pw, user_id))
+    conn.commit()
+    conn.close()
+
+    return f"✅ 비밀번호 초기화 완료! 임시 비밀번호: <b>{new_password}</b>"
+
+@app.route('/admin/delete_user/<int:user_id>', methods=['POST'])
+def delete_user(user_id):
+    if session.get('role') != 'admin':
+        return "⚠️ 관리자만 접근할 수 있습니다!"
+
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM users WHERE id=?", (user_id,))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('admin_users'))
+
 
 # ---------------- DB 초기화 및 실행 ----------------
 
