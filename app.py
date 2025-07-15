@@ -266,7 +266,7 @@ def reset_password(user_id):
         return "⚠️ 관리자만 접근할 수 있습니다!"
 
     # 임시 비밀번호 생성
-    new_password = 'Temp' + ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+    new_password = 'HaiC' + ''.join(random.choices(string.ascii_letters + string.digits, k=6))
     hashed_pw = generate_password_hash(new_password)
 
     conn = sqlite3.connect('data.db')
