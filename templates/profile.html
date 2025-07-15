@@ -6,7 +6,7 @@
 <div class="profile-container">
     <h2>프로필 관리</h2>
 
-   <form method="POST" action="{{ url_for('update_profile') }}" class="profile-form">
+    <form method="POST" action="{{ url_for('update_profile') }}" class="profile-form">
 
         <label for="new_username">아이디 변경</label>
         <input type="text" id="new_username" name="new_username" placeholder="새 아이디 입력">
@@ -15,15 +15,18 @@
         <input type="password" id="new_password" name="new_password" placeholder="새 비밀번호 입력">
 
         <label for="emoji">프로필 이모티콘</label>
-        <input type="text" id="emoji" name="emoji" placeholder="예: 😊" maxlength="2" value="{{ session['emoji'] if session.get('emoji') else '' }}">
+        <input type="text" id="emoji" name="emoji" placeholder="예: 😊" maxlength="2"
+            value="{{ session['emoji'] if session.get('emoji') else '' }}">
 
         <button type="submit" name="update_self" class="btn-update">수정</button>
     </form>
 
-    <form method="POST" action="{{ url_for('delete_account') }}" class="delete-form" onsubmit="return confirm('정말로 계정을 삭제하시겠습니까?');">
+    <form method="POST" action="{{ url_for('delete_account') }}" class="delete-form"
+        onsubmit="return confirm('정말로 계정을 삭제하시겠습니까?');">
         <button type="submit" name="delete_self" class="btn-delete">계정 삭제</button>
     </form>
 
 
 </div>
+
 {% endblock %}

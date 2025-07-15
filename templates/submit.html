@@ -11,14 +11,17 @@
         text-align: center;
         color: #333;
     }
+
     h1 {
         font-size: 3em;
         margin-bottom: 0.3em;
     }
+
     .emoji {
         font-size: 2.5em;
         margin-bottom: 0.5em;
     }
+
     form {
         display: flex;
         flex-direction: column;
@@ -27,13 +30,16 @@
         background-color: #ffffffdd;
         padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     label {
         font-weight: bold;
         font-size: 1.1em;
     }
-    input, button {
+
+    input,
+    button {
         padding: 10px;
         font-size: 1em;
         border-radius: 8px;
@@ -41,10 +47,12 @@
         outline: none;
         transition: border-color 0.3s;
     }
+
     input:focus {
         border-color: #007bff;
         box-shadow: 0 0 5px #007bff;
     }
+
     button {
         background-color: #007bff;
         color: white;
@@ -54,19 +62,23 @@
         margin-top: 10px;
         transition: background-color 0.3s;
     }
+
     .view-link {
-            margin-top: 1.0em;
-            font-size: 0.95em;
-            color: #555;
+        margin-top: 1.0em;
+        font-size: 0.95em;
+        color: #555;
     }
+
     .view-link a {
         color: #007bff;
         text-decoration: none;
         font-weight: bold;
     }
+
     .view-link a:hover {
         text-decoration: underline;
     }
+
     button:hover {
         background-color: #0056b3;
     }
@@ -91,4 +103,5 @@
         등록할 일정이 없으신가요? <a href="{{ url_for('view') }}">일정 조회 하러 가기</a>
     </div>
 </div>
+
 {% endblock %}

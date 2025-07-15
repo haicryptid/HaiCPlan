@@ -1,0 +1,27 @@
+.success-container {
+    margin-top: 150px;
+    text-align: center;
+}
+
+.success-message {
+    font-size: 2.5em;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.btn-next {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-next:hover {
+    background-color: #0056b3;
+}

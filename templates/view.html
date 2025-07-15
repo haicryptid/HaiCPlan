@@ -29,13 +29,14 @@
         width: 100%;
         table-layout: auto;
         border-collapse: collapse;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         border-radius: 12px;
         overflow: hidden;
         margin: 0 auto;
     }
 
-    th, td {
+    th,
+    td {
         padding: 12px 15px;
         word-break: keep-all;
         border-bottom: 1px solid #ddd;
@@ -100,7 +101,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>번호</th>  <!-- 여기 수정 -->
+                    <th>번호</th> <!-- 여기 수정 -->
                     <th>이름</th>
                     <th>과제/일정</th>
                     <th>마감일</th>
@@ -111,7 +112,7 @@
             <tbody>
                 {% for id, name, task, deadline, username in schedules %}
                 <tr>
-                    <td>{{ loop.index }}</td>  <!-- 여기 수정 -->
+                    <td>{{ loop.index }}</td> <!-- 여기 수정 -->
                     <td>{{ name }}</td>
                     <td>{{ task }}</td>
                     <td>{{ deadline }}</td>
@@ -128,4 +129,5 @@
         </table>
     </div>
 </div>
+
 {% endblock %}

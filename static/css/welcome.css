@@ -1,0 +1,54 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    text-align: center;
+    padding-top: 15vh;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+
+p {
+    font-size: 1.3em;
+    margin-bottom: 2em;
+}
+
+a.button {
+    padding: 1em 2em;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+
+a.button:hover {
+    background-color: #0056b3;
+}
+
+/* 기존 CSS 아래에 이어서 추가해줘! */
+
+.neon-btn {
+    padding: 1em 2em;
+    background-color: #3fb79d;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+
+.neon-btn:hover {
+    background: #00ffc8;
+    color: #3b907d;
+    box-shadow:
+        0 0 8px #00ffc8,
+        0 0 10px #00ffc8,
+        0 0 10px #00ffc8;
+    transform: scale(1.05);
+}

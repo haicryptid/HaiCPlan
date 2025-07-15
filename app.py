@@ -106,7 +106,7 @@ def update_profile():
             hashed_pw = generate_password_hash(new_password)
             c.execute("UPDATE users SET password=? WHERE username=?", (hashed_pw, session['username']))
 
-        # ✅ 조건 수정: new_username이 있을 때만 처리
+        # new_username이 있을 때만 처리
         if new_username and new_username != session['username']:
             c.execute("SELECT * FROM users WHERE username=?", (new_username,))
             if c.fetchone():
@@ -114,9 +114,11 @@ def update_profile():
                 return "이미 존재하는 아이디입니다."
             
             c.execute("UPDATE users SET username=? WHERE username=?", (new_username, session['username']))
+            c.execute("UPDATE schedules SET username=? WHERE username=?", (new_username, session['username']))
+            
             session['username'] = new_username
 
-        # ✅ emoji 업데이트
+        # emoji 업데이트
         c.execute("UPDATE users SET emoji=? WHERE username=?", (emoji, session['username']))
         session['emoji'] = emoji
 
@@ -134,6 +136,9 @@ def delete_account():
     username = session['username']
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
+
+    c.execute('DELETE FROM schedules WHERE username = ?', (username,))
+
     c.execute('DELETE FROM users WHERE username = ?', (username,))
     conn.commit()
     conn.close()
@@ -284,11 +289,26 @@ def delete_user(user_id):
 
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
-    c.execute("DELETE FROM users WHERE id=?", (user_id,))
-    conn.commit()
-    conn.close()
 
+    # schedules 테이블에는 user_id 없고 username만 저장되어있음
+	# 그래서 먼저 user_id에 해당하는 username 찾아주기
+    c.execute("SELECT username FROM users WHERE id = ?", (user_id,))
+    result = c.fetchone()
+
+    if result:
+        username = result[0]
+
+        # 일정 먼저 삭제
+        c.execute("DELETE FROM schedules WHERE username = ?", (username,))
+
+        # 사용자 삭제
+        c.execute("DELETE FROM users WHERE id = ?", (user_id,))
+
+        conn.commit()
+
+    conn.close()
     return redirect(url_for('admin_users'))
+
 
 
 # ---------------- DB 초기화 및 실행 ----------------

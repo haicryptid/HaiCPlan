@@ -3,44 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>HaiCPlan</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='HaiCPlan.png') }}">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 0.2em;
-        }
-        .emoji {
-            font-size: 2em;
-            margin-bottom: 1em;
-        }
-        .btn-group {
-            display: flex;
-            gap: 1em;
-        }
-        a.button {
-            padding: 0.8em 1.5em;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        a.button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/HaiCPlan.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
 </head>
 <body>
     <h1>🗓️ HAICPLAN ✨</h1>
